@@ -55,7 +55,7 @@ def extrair_conteudo_formatado(caminho_arquivo_pdf):
             texto_completo = texto_completo.split("FIM DA PUBLICAÇÃO")[0]
 
         # Remove o cabeçalho
-        marcador_fim_cabecalho = "Sávia Maria de Queiroz Magalhães"
+        marcador_fim_cabecalho = "Renato Torres de Abreu Neto"
         pos_marcador = texto_completo.find(marcador_fim_cabecalho)
         
         if pos_marcador != -1:
@@ -98,7 +98,7 @@ def enviar_email_com_anexos(lista_de_caminhos_anexos, data_diario_formatada, inf
         msg['From'] = f"Robô Intimação Adv <{email_remetente}>"
         msg['Subject'] = assunto
         
-        corpo = (f"🤖 Olá,\n\n"
+        corpo = (f"🤖 Olá!\n\n"
                  f"Seguem em anexo os arquivos PDF e ODT do Diário da Justiça Eletrônico do Ceará (DJe/CE) de {data_diario_formatada} ({info_edicao}).\n\n"
                  f"Abaixo, segue o conteúdo extraído do documento para consulta rápida.\n\n"
                  f"{'='*84}\n\n")
@@ -135,8 +135,8 @@ def enviar_email_com_anexos(lista_de_caminhos_anexos, data_diario_formatada, inf
         traceback.print_exc()
 
 def baixar_diario_mais_recente():
-    url_busca_api = "https://doalece.al.ce.gov.br/api/publico/ultimas-edicoes"
-    dominio_base = "https://doalece.al.ce.gov.br"
+    url_busca_api = "https://esaj.tjce.jus.br/cdje/index.do;jsessionid=98D01F1BFCB56C50E6365436C5F3E5A3.cdje1"
+    dominio_base = "https://esaj.tjce.jus.br/cdje/"
     headers = {'User-Agent': 'Mozilla/5.0'}
     diretorio_downloads = "diarios_oficiais_ce"
     if not os.path.exists(diretorio_downloads): os.makedirs(diretorio_downloads)
