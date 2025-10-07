@@ -95,16 +95,16 @@ def enviar_email_com_anexos(lista_de_caminhos_anexos, data_diario_formatada, inf
 
     try:
         msg = MIMEMultipart()
-        msg['From'] = f"Robô DOALECE <{email_remetente}>"
+        msg['From'] = f"Robô Intimação Adv <{email_remetente}>"
         msg['Subject'] = assunto
         
         corpo = (f"🤖 Olá,\n\n"
-                 f"Seguem em anexo os arquivos PDF e ODT do Diário Oficial da Assembleia Legislativa do Ceará de {data_diario_formatada} ({info_edicao}).\n\n"
+                 f"Seguem em anexo os arquivos PDF e ODT do Diário da Justiça Eletrônico do Ceará (DJe/CE) de {data_diario_formatada} ({info_edicao}).\n\n"
                  f"Abaixo, segue o conteúdo extraído do documento para consulta rápida.\n\n"
                  f"{'='*84}\n\n")
         corpo += texto_publicacoes
         corpo += f"\n{'='*83}\n\n"
-        corpo += "💡 Caso sinta falta de alguma publicação, por gentileza me informe para a melhoria contínua da minha atuação. 🦾\n\nAtenciosamente,\n\n🤖 Robô extraoficial de notificações do DOALECE 📄"
+        corpo += "💡 Caso sinta falta de alguma publicação, por gentileza me informe para a melhoria contínua da minha atuação. 🦾\n\nAtenciosamente,\n\n🤖 Robô de Intimações Adv 📄"
         msg.attach(MIMEText(corpo, 'plain', 'utf-8'))
         
         for caminho_anexo in lista_de_caminhos_anexos:
