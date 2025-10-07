@@ -1,0 +1,38 @@
+name: Monitor Diário Oficial ALECE
+
+# Define quando o robô vai rodar
+on:
+  # 1. Permite que você inicie manualmente pela aba "Actions"
+  workflow_dispatch:
+  # 2. Agenda a execução para todos os dias às 11:00 UTC (8h da manhã no horário de Fortaleza)
+  schedule:
+    - cron: '0 11 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # O robô vai rodar em uma máquina virtual Linux
+
+    steps:
+      # Passo 1: Baixa o código do seu repositório para a máquina virtual
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Passo 2: Configura o ambiente Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      # Passo 3: Instala as bibliotecas Python listadas no requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Passo 4: Executa o seu script, injetando os Secrets como variáveis de ambiente
+      - name: Run DOALECE Monitor Script
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          DESTINATARIOS: ${{ secrets.DESTINATARIOS }}
+        run: python monitor_doalece.py
